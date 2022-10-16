@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
 
-def main():
+import sys
+
+def get_file_content(filename):
+    with open(filename, 'r') as f:
+        return f.read().splitlines()
+
+
+def main(args):
+    if '-h' in args or '--help' in args:
+        usage(0)
+    if len(args) == 2:
+        exec_file_input(get_file_content(args[1]))
     while True:
         n, k, *p = map(float, input().split())
-        print(p)
         if n == 0:
             break
         table = [[0 for _ in range(200)] for _ in range(200)]
@@ -16,11 +26,36 @@ def main():
         for i in range(int(k)):
             sum += table[int(n)][i]
         print("%.5lf" % sum)
-            
+
+
+def exec_file_input(content):
+    for line in content:
+        n, k, *p = map(float, line.split())
+        if n == 0:
+            break
+        table = [[0 for _ in range(200)] for _ in range(200)]
+        table[0][0] = 1
+        for i in range(int(n)):
+            for j in range(int(k)):
+                table[i + 1][j + 1] += table[i][j] * p[i]
+                table[i + 1][0] += table[i][j] * (1 - p[i])
+        sum = 0
+        for i in range(int(k)):
+            sum += table[int(n)][i]
+        print("%.5lf" % sum)
+    exit(0)
+
+
+def usage(exit_code):
+    print("Usage: ./exercice_01.py [file]")
+    print("\tfile: file containing the input\n")
+    print("\t-h, --help: display this help")
+    exit(exit_code)
+
 
 if __name__ == '__main__':
     try:
-        main()
+        main(sys.argv)
     except KeyboardInterrupt:
         print("Exited")
         exit(0)
