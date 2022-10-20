@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
             scanf("%lf", &p[i]);
         memset(dp, 0, sizeof(dp));
         dp[0][0] = 1;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < k; j++) {
-                dp[i + 1][j + 1] += dp[i][j] * p[i];
-                dp[i + 1][0] += dp[i][j] * (1 - p[i]);
+        for (int line = 0; line < n; line++) {
+            for (int row = 0; row < k; row++) {
+                dp[line + 1][row + 1] += dp[line][row] * p[line];
+                dp[line + 1][0] += dp[line][row] * (1 - p[line]);
             }
         }
         sum = 0;

@@ -16,15 +16,15 @@ def main(args):
         n, k, *p = map(float, input().split())
         if n == 0:
             break
-        table = [[0 for _ in range(200)] for _ in range(200)]
-        table[0][0] = 1
+        array = [[0 for _ in range(200)] for _ in range(200)]
+        array[0][0] = 1
         for i in range(int(n)):
             for j in range(int(k)):
-                table[i + 1][j + 1] += table[i][j] * p[i]
-                table[i + 1][0] += table[i][j] * (1 - p[i])
+                array[i + 1][j + 1] += array[i][j] * p[i]
+                array[i + 1][0] += array[i][j] * (1 - p[i])
         sum = 0
         for i in range(int(k)):
-            sum += table[int(n)][i]
+            sum += array[int(n)][i]
         print("%.5lf" % sum)
 
 
@@ -33,15 +33,15 @@ def exec_file_input(content):
         n, k, *p = map(float, line.split())
         if n == 0:
             break
-        table = [[0 for _ in range(200)] for _ in range(200)]
-        table[0][0] = 1
+        array = [[0 for _ in range(200)] for _ in range(200)]
+        array[0][0] = 1
         for i in range(int(n)):
             for j in range(int(k)):
-                table[i + 1][j + 1] += table[i][j] * p[i]
-                table[i + 1][0] += table[i][j] * (1 - p[i])
+                array[i + 1][j + 1] += array[i][j] * p[i]
+                array[i + 1][0] += array[i][j] * (1 - p[i])
         sum = 0
         for i in range(int(k)):
-            sum += table[int(n)][i]
+            sum += array[int(n)][i]
         print("%.5lf" % sum)
     exit(0)
 
